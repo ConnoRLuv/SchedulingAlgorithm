@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1080.0" stylesheets="@CSS/stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+    <BorderPane fx:id="borderPane" prefHeight="200.0" prefWidth="200.0">
+        <left>
+            <SplitPane prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                <AnchorPane minWidth="200" prefHeight="422.0" prefWidth="214.0" styleClass="dark-gray-theme">
+                    <Accordion AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <panes>
+                            <TitledPane alignment="TOP_LEFT" styleClass="menu-title" text="调度算法">
+                                <VBox minHeight="100" spacing="10" styleClass="dark-theme">
+                                    <Button fx:id="RR_Button" onAction="#RR" styleClass="menu-btn" text="时间片轮转" />
+                                    <Button onAction="#HRN" styleClass="menu-btn" text="高响应比" />
+                                    <Button onAction="#PSA" styleClass="menu-btn" text="优先权调度" />
+                                    <Button onAction="#RRMF" styleClass="menu-btn" text="多级反馈队列" />
+                                </VBox>
+                            </TitledPane>
+                        </panes>
+                    </Accordion>
+                </AnchorPane>
+            </SplitPane>
+        </left>
+      <center>
+          <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="default-theme" BorderPane.alignment="CENTER">
+              <GridPane prefHeight="678.0" prefWidth="786.0" styleClass="add-button" stylesheets="@CSS/stylesheet.css">
+                  <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="215.0" prefWidth="419.9999572753906" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="15.0" minWidth="15.0" prefWidth="15.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                  <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="37.79999389648438" minHeight="10.0" prefHeight="37.79999389648438" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="75.0" minHeight="75.0" prefHeight="75.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="500.0" minHeight="330.0" prefHeight="330.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                  <TableView fx:id="addTable" disable="true" editable="true" prefHeight="175.0" prefWidth="185.0" tableMenuButtonVisible="true" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.rowSpan="2">
+                      <columns>
+                          <TableColumn fx:id="processNameCol" prefWidth="75.0" sortable="false" text="进程名" />
+                          <TableColumn fx:id="arriveTimeCol" prefWidth="75.0" sortable="false" text="到达时间" />
+                     <TableColumn fx:id="serveTimeCol" prefWidth="75.0" sortable="false" text="服务时间" />
+                     <TableColumn fx:id="priorityCol" prefWidth="75.0" sortable="false" text="优先级" />
+                      </columns>
+                  </TableView>
+               <TextArea fx:id="resultArea" disable="true" editable="false" prefHeight="357.0" prefWidth="768.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="7" />
+                  <HBox maxWidth="422.0" minWidth="310.0" prefHeight="38.0" prefWidth="422.0" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                      <Button fx:id="addBtn" disable="true" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="50.0" styleClass="main-btn">
+                          <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@icons/add.png" />
+                                  </image>
+                              </ImageView>
+                          </graphic>
+                      </Button>
+                      <Button fx:id="deleteBtn" disable="true" mnemonicParsing="false" onAction="#delButtonOnAction" prefHeight="50.0" styleClass="main-btn">
+                          <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="main-btn">
+                                  <image>
+                                      <Image url="@icons/delete.png" />
+                                  </image>
+                              </ImageView>
+                          </graphic>
+                      </Button>
+                      <Button fx:id="rewriteBtn" disable="true" mnemonicParsing="false" onAction="#reButtonOnAction" prefHeight="50.0" styleClass="main-btn">
+                          <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="main-btn">
+                                  <image>
+                                      <Image url="@icons/rewrite.png" />
+                                  </image>
+                              </ImageView>
+                          </graphic>
+                      </Button>
+                      <Button fx:id="submitBtn" disable="true" mnemonicParsing="false" onAction="#sbmButtonOnAction" prefHeight="50.0" styleClass="main-btn">
+                          <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="main-btn">
+                                  <image>
+                                      <Image url="@icons/submit.png" />
+                                  </image>
+                              </ImageView>
+                          </graphic>
+                      </Button>
+                  <ChoiceBox fx:id="choiceBox" prefHeight="38.0" prefWidth="139.0" visible="false" />
+                  <Button fx:id="aniBtn" disable="true" mnemonicParsing="false" onAction="#aniButtonOnAction" prefHeight="50.0" styleClass="main-btn">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" styleClass="main-btn">
+                           <image>
+                              <Image url="@icons/play.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="905.0" spacing="10.0" styleClass="top-bar" GridPane.columnSpan="5">
+                      <Button fx:id="addBtn1" mnemonicParsing="false" styleClass="top-btn">
+                          <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@icons/back.png" />
+                                  </image>
+                              </ImageView>
+                          </graphic>
+                      </Button>
+                      <Label fx:id="title" disable="true" prefHeight="39.0" prefWidth="310.0" text="请选择调度算法" textFill="WHITE">
+                          <font>
+                              <Font size="30.0" />
+                          </font>
+                      </Label>
+                  </HBox>
+               <TableView fx:id="addQueueTable" disable="true" editable="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.rowSpan="2">
+                 <columns>
+                   <TableColumn fx:id="queueNameCol" editable="false" prefWidth="75.0" text="队列" />
+                   <TableColumn fx:id="queuePriorityCol" editable="false" prefWidth="75.0" text="优先级" />
+                     <TableColumn fx:id="timeSliceNumCol" prefWidth="75.0" text="时间片数" />
+                 </columns>
+               </TableView>
+               <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                  <children>
+                     <Button fx:id="addQueueBtn" disable="true" mnemonicParsing="false" onAction="#addQueueButtonOnAction" prefHeight="50.0" styleClass="main-btn">
+                        <graphic>
+                           <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@icons/add.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                     </Button>
+                     <Button fx:id="deleteQueueBtn" disable="true" mnemonicParsing="false" onAction="#delQueueButtonOnAction" prefHeight="50.0" styleClass="main-btn">
+                        <graphic>
+                           <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="main-btn">
+                              <image>
+                                 <Image url="@icons/delete.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                     </Button>
+                     <Button fx:id="rewriteQueueBtn" disable="true" mnemonicParsing="false" onAction="#reQueueButtonOnAction" prefHeight="50.0" styleClass="main-btn">
+                        <graphic>
+                           <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="main-btn">
+                              <image>
+                                 <Image url="@icons/rewrite.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                     </Button>
+                     <Button fx:id="submitQueueBtn" disable="true" mnemonicParsing="false" onAction="#sbmQueueButtonOnAction" prefHeight="50.0" styleClass="main-btn">
+                        <graphic>
+                           <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="main-btn">
+                              <image>
+                                 <Image url="@icons/submit.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                     </Button>
+                  </children>
+               </HBox>
+              </GridPane>
+          </StackPane>
+      </center>
+    </BorderPane>
+</StackPane>
